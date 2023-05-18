@@ -1,17 +1,17 @@
-<?php   
+<?php
 
-abstract class Conexion {
+abstract class Conexion{
     public static $conexion = null;
 
-    private static function conectar (){
-        
-        //CONEXION A LA BD DE INFORMIX EN DOCKER
-        try {
-            self::$conexion= new PDO ("informix:host=host.docker.internal; service=9088;database=mdn; server=informix; protocol=onsoctcp;EnableScrollableCursors=1", "informix","in4mix");
-            // echo "conexion exitosa";
-        } catch (PDOException $e){
-        //IMPRIME EN PANTALLA EL ERROR 
-            echo "error de conexion de base de datos";
+    private static function conectar(){
+        try{
+            //CONEXION A LA BD DE INFORMIX EN DOCKER 
+            self::$conexion = new PDO('informix:host=host.docker.internal; service=9088; database=mdn; server=informix; protocol=onsoctcp;EnableScrollableCursors = 1','informix','in4mix'); 
+            // echo "CONECTADO";
+        }catch(PDOException $e){
+            // IMPRIME EN PANTALLA EL ERROR
+            echo "Error de conexion de BD";
+            echo "<br>";
             echo $e->getMessage();
             exit;
         }
@@ -19,18 +19,32 @@ abstract class Conexion {
         return self::$conexion;
     }
 
-    public static function ejecutar ($sql){
-        //CONECTANDOSE A LA BD CON EL METODO CONECTAR
+    public static function ejecutar($sql){
+        // CONECTANDOSE A LA BD CON EL METODO CONECTAR
         self::conectar();
-        //PREPARAMOS LA SENTENCIA
+        // PREPARAMOS LA SENTENCIA
         $sentencia = self::$conexion->prepare($sql);
-        //EJECUTAMOS LA SENTENCIA
-        $sentencia->execute();
-        $resultados = $sentencia->fetchAll (POO::FETCH_ASSOC);
-       //CERRAMOS LA CONEXION
-       self::$conexion = null;
-        //DEVOLVEMOS RESULTADOS
+        // EJECUTAMOS A SENTENCIA
+        $resultado = $sentencia->execute();
+        // CERRANDO LA CONEXION
+        self::$conexion = null;
+        // DEVOLVEMOS RESULTADOS
         return $resultado;
+    }
+
+    public static function servir($sql){
+        // CONECTANDOSE A LA BD CON EL METODO CONECTAR
+        self::conectar();
+        // PREPARAMOS LA SENTENCIA
+        $sentencia = self::$conexion->prepare($sql);
+        // EJECUTAMOS A SENTENCIA
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        // CERRANDO LA CONEXION
+        self::$conexion = null;
+        // DEVOLVEMOS RESULTADOS
+        return $resultados;
     }
 }
 ?>
