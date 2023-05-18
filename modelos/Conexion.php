@@ -26,7 +26,7 @@ abstract class Conexion {
         $sentencia = self::$conexion->prepare($sql);
         //EJECUTAMOS LA SENTENCIA
         $sentencia->execute();
-        $resultados = $sentencia->fet
+        $resultados = $sentencia->fetchAll (POO::FETCH_ASSOC);
        //CERRAMOS LA CONEXION
        self::$conexion = null;
         //DEVOLVEMOS RESULTADOS
