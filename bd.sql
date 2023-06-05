@@ -5,7 +5,7 @@ Create table productos (
     producto_situacion char (1) DEFAULT '1'
 );
 
-Create table cientes (
+Create table clientes (
     cliente_id serial primary key,
     cliente_nombre varchar (60) not null,
     cliente_nit varchar (10) not null,
@@ -30,4 +30,4 @@ Create table ventas (
     venta_situacion char (1) DEFAULT '1',
     primary key (venta_id),
     foreign key (venta_cliente) REFERENCES clientes (cliente_id) 
-);
+);  
