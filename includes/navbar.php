@@ -11,6 +11,19 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ventas
+                    </a>
+                    <ul class="dropdown-menu bg-dark">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crudphp18may2023/vistas/ventas/index.php">Ingresar venta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crudphp18may2023/vistas/ventas/buscar.php">Buscar venta</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Productos
                     </a>
                     <ul class="dropdown-menu bg-dark">
