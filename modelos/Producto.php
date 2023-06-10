@@ -1,5 +1,5 @@
 <?php
-require 'Conexion.php';
+require_once 'Conexion.php';
 
 class Producto extends Conexion{
     public $producto_id;
@@ -33,7 +33,25 @@ class Producto extends Conexion{
             $sql .= " and producto_precio = $this->producto_precio ";
         }
 
+        if($this->producto_id != null){
+            $sql .= " and producto_id = $this->producto_id ";
+        }
+
         $resultado = self::servir($sql);
+        return $resultado;
+    }
+
+    public function modificar(){
+        $sql = "UPDATE productos SET producto_nombre = '$this->producto_nombre', producto_precio = $this->producto_precio where producto_id = $this->producto_id";
+        
+        $resultado = self::ejecutar($sql);
+        return $resultado;
+    }
+
+    public function eliminar(){
+        $sql = "UPDATE productos SET producto_situacion = 0 where producto_id = $this->producto_id";
+        
+        $resultado = self::ejecutar($sql);
         return $resultado;
     }
 }
